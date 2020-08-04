@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .headerblock {
+            color: cornsilk;
+            background-color: #031125;
+            height: 70px;
+        }
+
+        .brand {
+            width: 20%;
+            text-align: left;
+            float: left;
+            padding: 20px;
+        }
+
+        .brand h2 {
+            font-size: 2vw;
+        }
+
+        .dateblock {
+            width: 60%;
+            padding: 20px;
+            float: left;
+        }
+
+        .info {
+            width: 20%;
+            float: right;
+            padding: 20px;
+        }
+
+        .info a i {
+            position: relative;
+            left: 50%;
+        }
+
+        .weatherdetailscont {
+            width: 70%;
+            height: auto;
+            background-color: #fff;
+            margin: auto auto;
+            position: absolute;
+            top: 120px;
+            bottom: 50px;
+            left: 0;
+            right: 0;
+            border-radius: 20px;
+            box-shadow: 0px 0px 19px 10px #dedddd;
+        }
+
+        .detailstop {
+            height: 310px;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            background-size: cover;
+            /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRmn2P0yiWs4yqY-S6LEw-3qbTXw929Q2LctWpMA_am07I8If-t&usqp=CAU); */
+            background-image: url(static/nature1.png);
+        }
+
+
+        .overlay {
+            height: 310px;
+            background-color: rgba(0, 0, 0, 0.49);
+            color: #fff;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .weatherdetailstop {
+            height: 195px;
+        }
+
+        .weatherdetailstopcontent {
+            width: 100%;
+            text-align: center;
+            height: 150px;
+        }
+
+        /* .detailstop img {
+
+            position: absolute;
+            height: 300px;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            background-size: cover;
+        } */
+
+
+        .weatherdetailstopleft {
+            width: 40%;
+            float: left;
+            text-align: center;
+            margin-top: 6%;
+            position: relative;
+            left: 100px;
+        }
+
+        /*   .degree {
+            position: relative;
+            left: 55px;
+        }
+ */
+        .degree span {
+            font-size: 60px;
+        }
+
+        .statustext span {
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding: 16px 0 0 0;
+            font-family: initial;
+            border-top: .5px solid #fff;
+            position: relative;
+            top: 22px;
+        }
+
+        .weatherdetailstopright {
+            width: 50%;
+            float: left;
+            margin-top: 6%;
+            height: 90px;
+            padding-top: 28px;
+            /* position: relative;
+            left: 75%; */
+        }
+
+        .searchField {
+            position: relative;
+            right: 55px;
+        }
+
+        span.currentinput {
+            padding-right: 50px;
+        }
+
+        span.currentinput input {
+            border: .5px solid #ced3d8;
+            outline: 0;
+            width: 250px;
+            height: 31px;
+            border-radius: 3px;
+            margin: 2px 17px;
+            padding-inline-start: 10px;
+            padding-inline-end: 10px;
+            color: #2d2a2a;
+        }
+
+        button.currentser {
+            position: relative;
+            right: 65px;
+            border-radius: 3px;
+        }
+
+        span.currentLoca img {
+            font-size: 20px;
+            position: relative;
+            right: 3px;
+            cursor: pointer;
+        }
+
+        .locaText {
+            text-align: center;
+            position: relative;
+            top: 50px;
+            letter-spacing: 2px;
+            font-size: 20px;
+            padding: 0 25px;
+        }
+
+        .botBlock {
+            height: 310px;
+            background-color: #fff;
+            border-radius: 20px;
+        }
+
+        .completeDetailsBlock {
+            position: relative;
+            top: 12%;
+            width: 100%;
+            height: 220px;
+        }
+
+        .details {
+            width: 20%;
+            float: left;
+        }
+
+        .reportIcon {
+            width: 53px;
+            height: 50px;
+            margin: 20px auto 15px auto;
+        }
+
+        .reportHead {
+            text-align: center;
+        }
+
+        .reportValue {
+            text-align: center;
+        }
+
+        p.statusSummary {
+            text-align: center;
+        }
+    </style>
+    <title>V-Weather</title>
+
+</head>
+
+<body>
+
+    <div class="app">
+        <div class="headerblock">
+            <div class="brand">
+                <h2>V-Weather</h2>
+            </div>
+            <div class="dateblock">
+                <span id="date">Monday, 12 March 2020</span>
+            </div>
+            <div class="info">
+                <a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="weatherbody">
+        <div class="weatherdetailscont">
+            <div class="detailstop">
+                <div class="overlay">
+                    <!-- {% load static %}
+                    <img src="{% static 'nature1.png' %}" /> -->
+                    <div class="weatherdetailstop">
+                        <div class="weatherdetailstopcontent">
+                            <div class="weatherdetailstopleft">
+                                <div class="degree">
+                                    <span>
+                                        <span id="degreevalue">0</span>&#x2103
+
+                                    </span>
+                                </div>
+                                <div class="statustext">
+                                    <span id="weatherStatus"></span>
+                                </div>
+                            </div>
+                            <div class="weatherdetailstopright">
+                                <form action="#">
+                                    <div class="searchfield">
+                                        <span class="currentinput">
+                                            <input type="text" id="placeName" value=" " placeholder="Search Location">
+                                        </span>
+                                        <button class="currentser" onclick="searchLocation()">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weatherDetailsBottom">
+                        <div class="locaText" id="locaText">
+                            <span class="currentLoca">
+                                <img
+                                    src="https://img.icons8.com/material/24/000000/worldwide-location--v1.png" /></span>
+                            <span class="location_text" id="fullLocation"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botBlock">
+                <div class="completeDetailsBlock">
+                    <div class="details">
+                        <p class="reportIcon reportIconRain"> <img
+                                src="https://img.icons8.com/ios-glyphs/60/000000/heavy-rain.png" /></p>
+                        <p class="reportHead">Rain Chance</p>
+                        <p class="reportValue"><span id="rainChance">0</span> %</p>
+                    </div>
+                    <div class="details">
+                        <p class="reportIcon reportIconWind">
+                            <img src="https://img.icons8.com/pastel-glyph/64/000000/wind-turbine-2.png" /></p>
+                        <p class="reportHead">Wind Speed</p>
+                        <p class="reportValue"><span id="windSpeed">0</span> mph</p>
+                    </div>
+                    <div class="details">
+                        <p class="reportIcon reportIconHum">
+                            <img src="https://img.icons8.com/ios-glyphs/60/000000/humidity.png" /></p>
+                        <p class="reportHead">Humidity</p>
+                        <p class="reportValue"><span id="humidity">0</span> %</p>
+                    </div>
+                    <div class="details">
+                        <p class="reportIcon reportIconVis">
+                            <img src="https://img.icons8.com/emoji/48/000000/rainbow-emoji.png" /></p>
+                        <p class="reportHead">Visibility</p>
+                        <p class="reportValue"><span id="visiblity">0</span> mi</p>
+                    </div>
+                    <div class="details">
+                        <p class="reportIcon reportIconDew">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/dew-point.png" /></p>
+                        <p class="reportHead">Dew Pt</p>
+                        <p class="reportValue"><span id="dwePt">0</span> &#730;</p>
+                    </div>
+                </div>
+                <p class="statusSummary" id="statusSummary"></p>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        var date = new Date()
+        document.getElementById("date").innerHTML = date;
+
+       /*  function hideLocation(){
+            document.getElementById('locaText').style.display='none';
+            document.getElementById('degreevalue').innerText = '0';
+            document.getElementById('weatherStatus').innerText = '';
+
+            document.getElementById('rainChance').innerText = '0';
+            document.getElementById('windSpeed').innerText = 0;
+            document.getElementById('humidity').innerText = '0';
+            document.getElementById('visiblity').innerText = '0';
+            document.getElementById('dwePt').innerText = '0';
+        } */
+
+        function searchLocation() {
+            let placeName = document.getElementById('placeName').value;
+            console.log(placeName);
+
+            // Build HTTP method
+            var xmlHttp = new XMLHttpRequest();
+
+            // Create URL
+            var latLongUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' + placeName + '.json?access_token=pk.eyJ1IjoiZGhhcmFuaW1hcC1ib3gxMjMiLCJhIjoiY2s3ZGxjOXZtMGFxbDNrbnk4MTlpcmo1eCJ9.fLPPNfCOjCesDmCLZPygPg&limit=1';
+
+            // Hit that above URL
+            xmlHttp.open("GET", latLongUrl, true); // false for synchronous request
+            xmlHttp.send();
+
+            // Check the status and Get the response
+            xmlHttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    getLatLong(data);
+                }
+            };
+        }
+
+        function getLatLong(data) {
+            let locationName = data.features[0].place_name;
+            let latitude = data.features[0].center[1];
+            let longitude = data.features[0].center[0];
+            var xmlHttp = new XMLHttpRequest();
+            var weatherApi = 'https://api.darksky.net/forecast/796c0f682d18872967827384c862bc9e/' + latitude + ',' + longitude + '?unit=si';
+
+            document.getElementById('fullLocation').innerText = locationName;
+            xmlHttp.open("GET", weatherApi, true); // false for synchronous request
+            xmlHttp.send();
+
+            xmlHttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var weatherDetails = JSON.parse(this.responseText);
+                    getWeather(weatherDetails);
+                }
+            };
+
+        }
+
+        function getWeather(weatherDetails) {
+            console.log(weatherDetails);
+            //Top Block
+            let temp = (weatherDetails.currently.temperature - 32) * 5 / 9;
+            document.getElementById('degreevalue').innerText = Math.round(temp);
+            document.getElementById('weatherStatus').innerText = weatherDetails.currently.summary;
+            //Bottom Block
+            document.getElementById('rainChance').innerText = weatherDetails.currently.precipProbability * 100;
+            document.getElementById('windSpeed').innerText = weatherDetails.currently.windSpeed;
+            document.getElementById('humidity').innerText = Math.round(weatherDetails.currently.humidity * 100);
+            document.getElementById('visiblity').innerText = weatherDetails.currently.visibility + '+';
+            document.getElementById('dwePt').innerText = weatherDetails.currently.dewPoint;
+            document.getElementById('statusSummary').innerText = weatherDetails.hourly.summary;
+        }
+
+
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d9b0be3553.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
